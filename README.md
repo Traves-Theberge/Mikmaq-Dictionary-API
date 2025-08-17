@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/Mikmaq_State_Flag.svg.png" alt="Mi'kmaq Nation Flag" width="400" style="margin: 20px 0;">
+  <img src="Mikmaq_State_Flag.png" alt="Mi'kmaq Nation Flag" width="400" style="margin: 20px 0;">
 </div>
 
 # Mi'kmaq Dictionary API
