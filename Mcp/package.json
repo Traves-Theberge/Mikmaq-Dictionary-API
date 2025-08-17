@@ -1,0 +1,25 @@
+{
+  "name": "mikmaq-dictionary-mcp-server",
+  "version": "1.0.0",
+  "description": "Local MCP Server for Mi'kmaq Dictionary API integration",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "install-deps": "npm install @modelcontextprotocol/sdk zod tsx typescript @types/node"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.9.2",
+    "tsx": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
