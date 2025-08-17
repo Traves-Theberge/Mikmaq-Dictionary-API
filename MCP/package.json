@@ -1,0 +1,40 @@
+{
+  "name": "mikmaq-dictionary-mcp",
+  "version": "1.0.0",
+  "description": "Mi'kmaq Dictionary Model Context Protocol Server",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mikmaq",
+    "dictionary",
+    "mcp",
+    "model-context-protocol",
+    "language",
+    "indigenous",
+    "context7"
+  ],
+  "author": "Mi'kmaq Language Preservation Project",
+  "license": "SEE LICENSE IN ../LICENSE",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "mikmaq-dictionary-mcp": "./dist/index.js"
+  }
+}

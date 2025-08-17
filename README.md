@@ -294,7 +294,11 @@ The API uses a comprehensive Mi'kmaq dictionary containing:
 - **Noun categories** (24% of dictionary):
   - Inanimate Nouns: 831 entries
   - Animate Nouns: 771 entries
-- **Other categories**: Particles, pronouns, etc.
+  - General Nouns: 29 entries
+- **Other categories** (4% of dictionary):
+  - Particles: 120 entries
+  - Unclassified: 83 entries
+  - Pronouns: 16 entries
 
 ## 📝 Example Usage
 
