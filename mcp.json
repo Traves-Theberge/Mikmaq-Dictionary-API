@@ -1,9 +1,0 @@
-{
-    "mcpServers": {
-      "mikmaq-dictionary": {
-        "command": "node",
-        "args": ["C:/Users/trave/Desktop/Programs/Mi'kmaq MCP/mcp/dist/index.js"],
-        "cwd": "C:/Users/trave/Desktop/Programs/Mi'kmaq MCP/mcp"
-      }
-    }
-  }
