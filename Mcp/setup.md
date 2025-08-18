@@ -40,12 +40,12 @@ npm start
 
 ### Architecture:
 ```
-Cursor IDE → MCP Server → Your Dictionary API → Response
+ IDE → MCP Server → Your Dictionary API → Response
 ```
 
 ### The Flow:
-1. **You ask Cursor**: "Look up the Mi'kmaq word 'samqwan'"
-2. **Cursor calls MCP tool**: `lookup_mikmaq_word` with `{"word": "samqwan"}`  
+1. **You ask in you IDE/CLI**: "Look up the Mi'kmaq word 'samqwan'"
+2. **IDE/CLI calls MCP tool**: `lookup_mikmaq_word` with `{"word": "samqwan"}`  
 3. **MCP server calls your API**: `GET http://localhost:3000/api/v1/entries/mik/samqwan`
 4. **API responds**: `[{"word": "samqwan", "meanings": [{"definitions": ["water"]}]}]`
 5. **MCP formats response**: "**samqwan** (noun) • water"

@@ -2,7 +2,7 @@
   <img src="Mikmaq_State_Flag.png" alt="Mi'kmaq Nation Flag" width="400" style="margin: 20px 0;">
 </div>
 
-# Mi'kmaq Dictionary API
+# Mi'kmaq Dictionary API & MCP
 
 A comprehensive RESTful API for Mi'kmaq language dictionary lookups with bidirectional search capabilities, built with TypeScript and Express.js. This API provides access to over 6,500 Mi'kmaq words with definitions, translations, and usage examples.
 
@@ -22,6 +22,8 @@ This digital resource serves the Mi'kmaq community in preserving and revitalizin
 - 🛡️ **Production Security**: Rate limiting, CORS, security headers, and health monitoring
 - 📊 **Analytics**: Comprehensive dictionary statistics and insights
 - 🧪 **Fully Tested**: 71 comprehensive tests with 100% core functionality coverage
+- 🔌 **MCP Integration**: Model Context Protocol server for seamless IDE integration (Cursor, VS Code)
+- 🤖 **AI Assistant Ready**: Direct access to Mi'kmaq dictionary through AI coding assistants
 
 ## 📚 Complete API Reference
 
@@ -126,6 +128,138 @@ All endpoints support these optional parameters:
     ]
   }
 ]
+```
+
+## 🔌 MCP Integration (Model Context Protocol)
+
+The Mi'kmaq Dictionary API includes a **Model Context Protocol (MCP) server** that enables seamless integration with AI-powered IDEs like Cursor, allowing AI assistants to directly access Mi'kmaq language resources during development.
+
+### 🌟 MCP Features
+
+- **7 MCP Tools** for comprehensive Mi'kmaq dictionary access
+- **IDE Integration**: Works with Cursor, VS Code, and other MCP-compatible editors
+- **AI Assistant Access**: Enable AI coding assistants to lookup, translate, and learn Mi'kmaq words
+- **Docker Ready**: Containerized MCP server with automatic API connectivity
+- **Real-time Access**: Direct API integration without additional configuration
+
+### 🛠️ Available MCP Tools
+
+1. **`lookup_mikmaq_word`** - Look up Mi'kmaq words and get English definitions
+2. **`lookup_english_word`** - Find Mi'kmaq translations for English words  
+3. **`search_dictionary`** - Bidirectional fuzzy search (English ↔ Mi'kmaq)
+4. **`get_random_word`** - Get random Mi'kmaq words for learning
+5. **`get_dictionary_stats`** - View dictionary statistics and word counts
+6. **`get_word_types`** - List all grammatical categories
+7. **`check_api_health`** - Monitor API status and connectivity
+
+### 🚀 Quick MCP Setup
+
+#### Option 1: Docker Compose (Recommended)
+
+```bash
+# Start both API and MCP server together
+docker-compose up -d
+
+# The MCP server will be available for IDE integration
+# API: http://localhost:3000
+# MCP: Ready for IDE connection
+```
+
+#### Option 2: Local Development
+
+```bash
+# Start the dictionary API first
+npm run dev
+
+# In a separate terminal, start the MCP server
+cd Mcp
+npm install
+npm run build
+npm start
+```
+
+### 🔧 Cursor IDE Configuration
+
+Add this to your Cursor MCP settings (`~/.cursor/mcp_servers.json` or workspace settings):
+
+**For Docker deployment:**
+```json
+{
+  "mcpServers": {
+    "mikmaq-dictionary": {
+      "description": "Mi'kmaq Dictionary API integration for language preservation and learning",
+      "command": "docker",
+      "args": [
+        "run", "-i", "--rm",
+        "--network", "mcp_mikmaq-network", 
+        "mcp-mikmaq-mcp-server"
+      ],
+      "env": {
+        "MIKMAQ_API_URL": "http://mikmaq-dictionary-api:3000",
+        "MIKMAQ_API_TIMEOUT": "10000"
+      }
+    }
+  }
+}
+```
+
+**For local development:**
+```json
+{
+  "mcpServers": {
+    "mikmaq-dictionary": {
+      "description": "Mi'kmaq Dictionary API integration for language preservation and learning",
+      "command": "node",
+      "args": ["dist/index.js"],
+      "cwd": "/path/to/your/project/Mcp",
+      "env": {
+        "MIKMAQ_API_URL": "http://localhost:3000"
+      }
+    }
+  }
+}
+```
+
+### 💬 Using MCP in Your IDE
+
+Once configured, you can interact with the Mi'kmaq dictionary directly through your AI assistant:
+
+**Example conversations:**
+- *"Look up the Mi'kmaq word 'samqwan'"*
+- *"Find Mi'kmaq translations for 'water'"*
+- *"Give me a random Mi'kmaq word to learn today"*
+- *"Search for Mi'kmaq words related to 'ocean'"*
+- *"Show me dictionary statistics"*
+- *"What grammatical word types are available in Mi'kmaq?"*
+
+The AI assistant will use the MCP tools to provide real-time access to the dictionary, supporting language learning and cultural preservation directly in your development environment.
+
+### 🧪 Testing MCP Integration
+
+```bash
+# Test MCP server connectivity
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | npm start
+
+# Test a dictionary lookup
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "lookup_mikmaq_word", "arguments": {"word": "samqwan"}}}' | npm start
+
+# Test random word generation
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "get_random_word", "arguments": {}}}' | npm start
+```
+
+### 📁 MCP Project Structure
+
+```
+Mcp/
+├── src/
+│   ├── index.ts              # Main MCP server implementation
+│   ├── dictionary-client.ts  # API client for dictionary service
+│   └── types.ts             # TypeScript type definitions
+├── dist/                    # Compiled JavaScript output
+├── package.json            # Dependencies and scripts
+├── tsconfig.json           # TypeScript configuration
+├── Dockerfile              # Container configuration
+└── docker-compose.yml     # Multi-service orchestration
 ```
 
 ## 🚀 Setup Instructions
@@ -267,6 +401,16 @@ mikmaq-dictionary-api/
 │   ├── middleware/        # Express middleware
 │   ├── routes/            # API routes
 │   └── index.ts           # Main application entry
+├── Mcp/                   # Model Context Protocol server
+│   ├── src/               # MCP server source code
+│   │   ├── index.ts       # Main MCP server implementation
+│   │   ├── dictionary-client.ts  # API client
+│   │   └── types.ts       # MCP type definitions
+│   ├── dist/              # Compiled MCP server
+│   ├── package.json       # MCP dependencies
+│   ├── tsconfig.json      # MCP TypeScript config
+│   ├── Dockerfile         # MCP container configuration
+│   └── docker-compose.yml # MCP orchestration
 ├── tests/                 # Test suites
 │   ├── services/          # Service layer tests
 │   ├── controllers/       # Controller tests
@@ -274,6 +418,7 @@ mikmaq-dictionary-api/
 │   └── setup.ts          # Test configuration
 ├── dist/                  # Compiled JavaScript (after build)
 ├── dictionary.json        # Mi'kmaq language dictionary data
+├── mcp.json              # MCP server configuration
 ├── Dockerfile            # Docker container configuration
 ├── docker-compose.yml    # Multi-container setup
 ├── package.json          # Node.js dependencies and scripts
@@ -392,6 +537,35 @@ docker-compose build --no-cache
 docker-compose up -d
 ```
 
+#### MCP Integration Issues
+```bash
+# Test MCP server connectivity
+cd Mcp
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/list"}' | npm start
+
+# Check if dictionary API is accessible from MCP server
+curl http://localhost:3000/api/v1/health
+
+# Verify MCP server Docker network
+docker network ls | grep mcp
+docker-compose logs mikmaq-mcp-server
+
+# Test MCP tools directly
+echo '{"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "get_random_word", "arguments": {}}}' | npm start
+```
+
+#### Cursor IDE Integration Issues
+```bash
+# Verify MCP configuration file location
+ls ~/.cursor/mcp_servers.json
+
+# Check Cursor logs for MCP connection errors
+# Restart Cursor after MCP configuration changes
+
+# Test MCP server independently
+cd Mcp && npm start
+```
+
 ### Performance Tips
 
 #### For Large Scale Usage
@@ -430,6 +604,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 
 ## Docker Commands
 
+### API Only
 ```bash
 # Build image
 docker build -t mikmaq-dictionary-api .
@@ -441,6 +616,27 @@ docker run -p 3000:3000 -v $(pwd)/dictionary.json:/app/dictionary.json:ro mikmaq
 docker-compose up -d        # Start services
 docker-compose logs -f      # View logs
 docker-compose down         # Stop services
+```
+
+### API + MCP Server
+```bash
+# Start both API and MCP server
+docker-compose up -d
+
+# View MCP server logs
+docker-compose logs -f mikmaq-mcp-server
+
+# View API logs
+docker-compose logs -f mikmaq-dictionary-api
+
+# Stop all services
+docker-compose down
+
+# Rebuild MCP server
+cd Mcp
+docker build -t mcp-mikmaq-mcp-server .
+cd ..
+docker-compose up -d
 ```
 
 ## API Response Format
