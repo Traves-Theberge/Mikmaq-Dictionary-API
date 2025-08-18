@@ -2,7 +2,7 @@
   <img src="Mikmaq_State_Flag.png" alt="Mi'kmaq Nation Flag" width="400" style="margin: 20px 0;">
 </div>
 
-# Mi'kmaq Dictionary API
+# Mi'kmaq Dictionary API & MCP
 
 A comprehensive RESTful API for Mi'kmaq language dictionary lookups with bidirectional search capabilities, built with TypeScript and Express.js. This API provides access to over 6,500 Mi'kmaq words with definitions, translations, and usage examples.
 
